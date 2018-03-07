@@ -4,5 +4,5 @@ from app import app
 
 @app.route('/')
 def index():
-    return "Flask application template!"
+    return "Flask application template! Home Page"
 
