@@ -13,10 +13,10 @@ def load_text_file(file_path):
     """
     try:
         with open(file_path) as data_file:
-            return data_file.read()
+            return None, data_file.read()
     except IOError as e:
         print("utils.load_text_file: {}".format(e))
-        return None
+        return '{}'.format(e), None
 
 
 def save_json_to_file(file_path, data):
