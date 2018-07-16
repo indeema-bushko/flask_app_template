@@ -3,6 +3,7 @@
 from app import app
 import os
 from flask import Response
+import hashlib
 
 from app import utils
 from app import config
@@ -35,8 +36,10 @@ def get_rca():
         return error
     head, tail = os.path.split(config.rootCA)
     print('{}: {}'.format(head, tail))
+    md5 = hashlib.md5(open(config.rootCA, 'rb').read()).hexdigest()
     response = Response(content, mimetype='application/text',
-                        headers={'Content-Disposition': 'attachment;filename={}'.format(tail)})
+                        headers={'Content-Disposition': 'attachment;filename={}'.format(tail),
+                                 'Content-MD5': md5})
     return response
 
 
@@ -47,8 +50,10 @@ def get_certificate():
         return error
     head, tail = os.path.split(config.certificate)
     print('{}: {}'.format(head, tail))
+    md5 = hashlib.md5(open(config.certificate, 'rb').read()).hexdigest()
     return Response(content, mimetype='application/text',
-                    headers={'Content-Disposition': 'attachment;filename={}'.format(tail)})
+                    headers={'Content-Disposition': 'attachment;filename={}'.format(tail),
+                             'Content-MD5': md5})
 
 
 @app.route('/public_key', methods=['GET'])
@@ -58,8 +63,10 @@ def get_public_key():
         return error
     head, tail = os.path.split(config.publicKey)
     print('{}: {}'.format(head, tail))
+    md5 = hashlib.md5(open(config.publicKey, 'rb').read()).hexdigest()
     return Response(content, mimetype='application/text',
-                    headers={'Content-Disposition': 'attachment;filename={}'.format(tail)})
+                    headers={'Content-Disposition': 'attachment;filename={}'.format(tail),
+                             'Content-MD5': md5})
 
 
 @app.route('/private_key', methods=['GET'])
@@ -67,8 +74,10 @@ def get_private_key():
     error, content = utils.load_text_file(config.privateKey)
     if error:
         return error
-    head, tail = os.path.split(config.publicKey)
+    head, tail = os.path.split(config.privateKey)
     print('{}: {}'.format(head, tail))
+    md5 = hashlib.md5(open(config.privateKey, 'rb').read()).hexdigest()
     return Response(content, mimetype='application/text',
-                    headers={'Content-Disposition': 'attachment;filename={}'.format(tail)})
+                    headers={'Content-Disposition': 'attachment;filename={}'.format(tail),
+                             'Content-MD5': md5})
 
