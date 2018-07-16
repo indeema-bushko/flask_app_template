@@ -73,13 +73,34 @@ def delete_files(path, list_of_files):
                 os.remove(file)
 
 
-def extract_archive(target_dir='.', absolute_path_to_file=None, compression='r:gz'):
+def tar_extract(target_dir='.', absolute_path_to_file=None, compression='r:gz'):
+    """
+    Extract tar.gz archive in to current directory
+    :param target_dir:
+    :param absolute_path_to_file:
+    :param compression:
+    :return:
+    """
     if absolute_path_to_file:
         try:
             tar_file = tarfile.open(absolute_path_to_file, compression)
             tar_file.extractall(target_dir)
         except tarfile.TarError as e:
             raise Exception(e)
+
+
+def tar_compress(target_dir):
+    """
+    Compress target directory to tar.gz archive format
+    :param target_dir:
+    :return:
+    """
+    with tarfile.open('{}.tar.gz'.format(target_dir), 'w:gz') as tar:
+        tar.add(target_dir, arcname=os.path.basename(target_dir))
+    if os.path.exists('{}.tar.gz'.format(target_dir)):
+        return '{}.tar.gz'.format(target_dir)
+    else:
+        return None
 
 
 def get_files_list_from_tar(path, compression='r:gz'):
