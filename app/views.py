@@ -4,6 +4,7 @@ from app import app
 import os
 from flask import Response
 from flask import send_file, make_response
+from flask import request
 import hashlib
 
 from app import utils
@@ -14,12 +15,24 @@ curr_dir = os.path.dirname(os.path.realpath(__file__))
 
 @app.route('/', methods=['GET'])
 def home():
-    return '<a href=\"/device-config\">download device config json</a><br>' \
+    return '<a href=\"/auth?uuid=1234567890\">auth</a><br>' \
+           '<a href=\"/device-config\">download device config json</a><br>' \
            '<a href=\"/rca\">download rootCA file</a><br>' \
            '<a href=\"/cert\">download certificate pem</a><br>' \
            '<a href=\"/public_key\">download public key</a><br>' \
            '<a href=\"/private_key\">download private key</a><br>' \
            '<a href=\"/certs_tar\">download certs tar.gz</a><br>'
+
+
+@app.route('/auth', methods=['GET'])
+def auth():
+    print(request.headers)
+    dev_uuid = request.args.get('uuid')
+    print('UUID: {}'.format(dev_uuid))
+    if dev_uuid:
+        return 'Success'
+    else:
+        return 'Error authentication', 404
 
 
 @app.route('/device-config', methods=['GET'])
