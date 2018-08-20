@@ -39,7 +39,7 @@ def auth():
 def device_config():
     error, context = utils.load_text_file(config.device_config)
     if error:
-        return error
+        return Response(error, mimetype="text/plain", status=204)
     return Response(context, mimetype='application/json',
                     headers={'Content-Disposition': 'attachment;filename=device-config.json'})
 
@@ -55,6 +55,7 @@ def get_rca():
     response = Response(content, mimetype='application/text',
                         headers={'Content-Disposition': 'attachment;filename={}'.format(tail),
                                  'Content-MD5': md5})
+    response.re
     return response
 
 
