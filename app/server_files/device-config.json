@@ -1,3 +1,46 @@
 {
-  "id": "1234567890"
+  "name": "RV50_Gateway_Name",
+  "global_id": "RV50_Global_Gateway_ID",
+  "site_id": "RV50_Gateway_Site_ID",
+
+  "interface": {
+  },
+
+  "devices": [
+    {
+      "name": "PLC_Name",
+      "serial_number": "PLCV_Serial_Number",
+      "modbus_id": 1,
+
+      "sensors": [
+        {
+          "tag_name": "sensor_tag_name",
+          "modbus_register_type": 1,
+          "modbus_data_type": "INT",
+          "modbus_data_size_byets": 2,
+          "sampling_interval_ms": 1000,
+          "value_multiplier": 0.1
+        }
+      ]
+    }
+  ],
+
+  "credentials": {
+    "certs_url": "http://165.227.132.86:5057/certs",
+    "ca_file": "rootCA.pem",
+    "cert_file": "certificate.pem.crt",
+    "key_file": "private.pem.key"
+  },
+
+  "mqtt": {
+
+    "credentials": {
+      "url": "165.227.132.86",
+      "port": 1883,
+      "secure": false
+    },
+
+    "topics": {
+    }
+  }
 }
