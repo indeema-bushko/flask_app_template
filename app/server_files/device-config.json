@@ -1,46 +1,88 @@
 {
-  "name": "RV50_Gateway_Name",
-  "global_id": "RV50_Global_Gateway_ID",
-  "site_id": "RV50_Gateway_Site_ID",
-
-  "interface": {
-  },
-
-  "devices": [
-    {
-      "name": "PLC_Name",
-      "serial_number": "PLCV_Serial_Number",
-      "modbus_id": 1,
-
-      "sensors": [
+    "global_id": "5b4ee921a1c1ec0dd4b6746f",
+    "name": "My Gateway",
+    "site_id": "5b2cad00ad6c4d2b07e1f8f3",
+    "devices": [
         {
-          "tag_name": "sensor_tag_name",
-          "modbus_register_type": 1,
-          "modbus_data_type": "INT",
-          "modbus_data_size_byets": 2,
-          "sampling_interval_ms": 1000,
-          "value_multiplier": 0.1
+            "_id": "5b5ec8774217955be80a4199",
+            "name": "test",
+            "createdAt": "2018-07-30T08:12:39.806Z",
+            "updatedAt": "2018-07-30T08:12:39.853Z",
+            "__v": 0,
+            "gateway": "5b4ee921a1c1ec0dd4b6746f",
+            "id": "5b5ec8774217955be80a4199",
+            "site": "5b2cad00ad6c4d2b07e1f8f3",
+            "location": "lost-site.com",
+            "modbus_id": 1,
+            "serial_number": "2sdgdsgs",
+            "software_version": "12421",
+            "sensors": [
+                {
+                    "_id": "5b5ec8944217955be80a419c",
+                    "name": "my sensor 3",
+                    "createdAt": "2018-07-30T08:13:08.742Z",
+                    "updatedAt": "2018-07-30T08:13:08.745Z",
+                    "__v": 0,
+                    "device": "5b5ec8774217955be80a4199",
+                    "id": "5b5ec8944217955be80a419c",
+                    "site": "5b2cad00ad6c4d2b07e1f8f3",
+                    "modbus_data_size_bytes": 2,
+                    "modbus_data_type": "1",
+                    "modbus_register_address": 0,
+                    "modbus_register_type": "holding",
+                    "sampling_internal_ms": 1,
+                    "tag_name": "test3",
+                    "value_multiplier": 0.1
+                }
+            ]
+        },
+        {
+            "_id": "5b5ec87f4217955be80a419a",
+            "name": "test2",
+            "createdAt": "2018-07-30T08:12:47.968Z",
+            "updatedAt": "2018-07-30T08:12:47.974Z",
+            "__v": 0,
+            "gateway": "5b4ee921a1c1ec0dd4b6746f",
+            "id": "5b5ec87f4217955be80a419a",
+            "site": "5b2cad00ad6c4d2b07e1f8f3",
+            "interface_description_object": "fseef",
+            "location": "lost-site.com",
+            "modbus_id": 23,
+            "serial_number": "23t23fg23f32",
+            "software_version": "33333",
+            "sensors": [
+                {
+                    "_id": "5b5ec88b4217955be80a419b",
+                    "name": "my sensor",
+                    "createdAt": "2018-07-30T08:12:59.253Z",
+                    "updatedAt": "2018-07-30T08:12:59.267Z",
+                    "__v": 0,
+                    "device": "5b5ec87f4217955be80a419a",
+                    "id": "5b5ec88b4217955be80a419b",
+                    "site": "5b2cad00ad6c4d2b07e1f8f3",
+                    "modbus_data_size_bytes": 2,
+                    "modbus_register_address": 0,
+                    "modbus_register_type": "holding",
+                    "sampling_internal_ms": 1,
+                    "tag_name": "test",
+                    "value_multiplier": 0.1
+                }
+            ]
         }
-      ]
-    }
-  ],
-
-  "credentials": {
-    "certs_url": "http://165.227.132.86:5057/certs",
-    "ca_file": "rootCA.pem",
-    "cert_file": "certificate.pem.crt",
-    "key_file": "private.pem.key"
-  },
-
-  "mqtt": {
-
+    ],
+    "interface": {},
     "credentials": {
-      "url": "165.227.132.86",
-      "port": 1883,
-      "secure": false
+        "certs_url": "http://165.227.132.86:5055/certs_tar",
+        "ca_file": "rootCA.pem",
+        "cert_file": "maven-indeema.pem.crt",
+        "key_file": "maven-indeema.pem.key"
     },
-
-    "topics": {
+    "mqtt": {
+        "credentials": {
+            "url": "165.227.132.86",
+            "port": 1883,
+            "secure": false
+        },
+        "topics": {}
     }
-  }
 }

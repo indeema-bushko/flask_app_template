@@ -17,11 +17,12 @@ curr_dir = os.path.dirname(os.path.realpath(__file__))
 def home():
     return '<a href=\"/auth?uuid=1234567890\">auth</a><br>' \
            '<a href=\"/device-config\">download device config json</a><br>' \
-           '<a href=\"/rca\">download rootCA file</a><br>' \
-           '<a href=\"/cert\">download certificate pem</a><br>' \
-           '<a href=\"/public_key\">download public key</a><br>' \
-           '<a href=\"/private_key\">download private key</a><br>' \
-           '<a href=\"/certs_tar\">download certs tar.gz</a><br>'
+           '<a href=\"/certs\">download certs tar.gz</a><br>'
+
+            #'<a href=\"/rca\">download rootCA file</a><br>' \
+            # '<a href=\"/cert\">download certificate pem</a><br>' \
+            # '<a href=\"/public_key\">download public key</a><br>' \
+            # '<a href=\"/private_key\">download private key</a><br>' \
 
 
 @app.route('/auth', methods=['GET'])
@@ -59,7 +60,7 @@ def get_rca():
     return response
 
 
-@app.route('/certs_tar', methods=['GET'])
+@app.route('/certs', methods=['GET'])
 def certs_tar():
     path_to_tar = utils.tar_compress(config.cert_dir)
     if path_to_tar is None:
@@ -70,7 +71,11 @@ def certs_tar():
     print(path_to_tar)
     print(md5)
     print(tail)
+    # response = make_response(send_file(path_to_tar, attachment_filename=tail))
+
+    response = send_file(path_to_tar, attachment_filename = 'certs.tar.gz')
     response = make_response(send_file(path_to_tar, attachment_filename=tail))
+
     response.headers['Content-MD5'] = md5
     response.headers['Content-Disposition'] = 'attachment;filename={}'.format(tail)
     return response

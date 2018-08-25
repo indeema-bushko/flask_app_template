@@ -10,9 +10,9 @@ certs_tar_gz = os.path.join(curr_work_dir, 'server_files/certs.tar.gz')
 
 rootCA = os.path.join(curr_work_dir, 'server_files/certs/rootCA.pem')
 
-certificate = os.path.join(curr_work_dir, 'server_files/certs/f926e85654-certificate.pem.crt')
+certificate = os.path.join(curr_work_dir, 'server_files/certs/certificate.pem.crt')
 
-privateKey = os.path.join(curr_work_dir, 'server_files/certs/f926e85654-private.pem.key')
+privateKey = os.path.join(curr_work_dir, 'server_files/certs/private.pem.key')
 
-publicKey = os.path.join(curr_work_dir, 'server_files/certs/f926e85654-public.pem.key')
+publicKey = os.path.join(curr_work_dir, 'server_files/certs/public.pem.key')
 
