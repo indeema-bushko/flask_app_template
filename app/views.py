@@ -9,6 +9,7 @@ import hashlib
 
 from app import utils
 from app import config
+import logging
 
 curr_dir = os.path.dirname(os.path.realpath(__file__))
 
@@ -27,9 +28,10 @@ def home():
 
 @app.route('/auth', methods=['GET'])
 def auth():
-    print(request.headers)
+    logging.info(request.url)
+    # logging.info(request.headers)
     dev_uuid = request.args.get('uuid')
-    print('UUID: {}'.format(dev_uuid))
+    logging.info('UUID: {}'.format(dev_uuid))
     if dev_uuid:
         return 'Success'
     else:
@@ -38,6 +40,7 @@ def auth():
 
 @app.route('/device-config', methods=['GET'])
 def device_config():
+    logging.info(request.url)
     error, context = utils.load_text_file(config.device_config)
     if error:
         return Response(error, mimetype="text/plain", status=204)
@@ -47,6 +50,7 @@ def device_config():
 
 @app.route('/rca', methods=['GET'])
 def get_rca():
+    logging.info(request.url)
     error, content = utils.load_text_file(os.path.join(curr_dir, 'server_files/certs/rootCA.pem'))
     if error:
         return error
@@ -56,12 +60,12 @@ def get_rca():
     response = Response(content, mimetype='application/text',
                         headers={'Content-Disposition': 'attachment;filename={}'.format(tail),
                                  'Content-MD5': md5})
-    response.re
     return response
 
 
 @app.route('/certs', methods=['GET'])
 def certs_tar():
+    logging.info(request.url)
     path_to_tar = utils.tar_compress(config.cert_dir)
     if path_to_tar is None:
         content = 'File not found..'
@@ -72,10 +76,7 @@ def certs_tar():
     print(md5)
     print(tail)
     # response = make_response(send_file(path_to_tar, attachment_filename=tail))
-
     response = send_file(path_to_tar, attachment_filename = 'certs.tar.gz')
-    response = make_response(send_file(path_to_tar, attachment_filename=tail))
-
     response.headers['Content-MD5'] = md5
     response.headers['Content-Disposition'] = 'attachment;filename={}'.format(tail)
     return response
@@ -83,6 +84,7 @@ def certs_tar():
 
 @app.route('/cert', methods=['GET'])
 def get_certificate():
+    logging.info(request.url)
     error, content = utils.load_text_file(config.certificate)
     if error:
         return error
@@ -96,6 +98,7 @@ def get_certificate():
 
 @app.route('/public_key', methods=['GET'])
 def get_public_key():
+    logging.info(request.url)
     error, content = utils.load_text_file(config.publicKey)
     if error:
         return error
@@ -109,6 +112,7 @@ def get_public_key():
 
 @app.route('/private_key', methods=['GET'])
 def get_private_key():
+    logging.info(request.url)
     error, content = utils.load_text_file(config.privateKey)
     if error:
         return error
