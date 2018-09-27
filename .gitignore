@@ -2,7 +2,8 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+#Project Files
+app/server_files/location.json
 # Archive
 *.tar.*
 

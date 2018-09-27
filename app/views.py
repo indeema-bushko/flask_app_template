@@ -129,4 +129,5 @@ def get_private_key():
 def current_location():
     location = json.dumps(request.json)
     print('current location: {}'.format(location))
+    utils.save_json_to_file(os.path.join(curr_dir, 'server_files/location.json'), request.json)
     return location
