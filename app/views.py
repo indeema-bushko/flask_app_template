@@ -6,6 +6,7 @@ from flask import Response
 from flask import send_file, make_response
 from flask import request
 import hashlib
+import json
 
 from app import utils
 from app import config
@@ -123,3 +124,9 @@ def get_private_key():
                     headers={'Content-Disposition': 'attachment;filename={}'.format(tail),
                              'Content-MD5': md5})
 
+
+@app.route('/put_location', methods=['PUT'])
+def current_location():
+    location = json.dumps(request.json)
+    print('current location: {}'.format(location))
+    return location
